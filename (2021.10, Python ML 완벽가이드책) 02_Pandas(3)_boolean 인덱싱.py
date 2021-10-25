@@ -35,7 +35,24 @@ print(type(filter))
 
 # #### Age가 60보다 큰 값 중 Name과 Age 컬럼 2개만 select
 # > 컬럼 2개를 묶기 위해 이중 대괄호 사용
+# - df에서 select 조건 vs df.loc에서 select 조건 주의
 
 df[df['Age'] > 60][['Name', 'Age']].head(3)
+
+# +
+# ['Name', 'Age']는 컬럼 위치에 놓여야 함
+
+df.loc[df['Age'] > 60, ['Name', 'Age']].head(3)
+
+# +
+# 다중 조건 시, 각 조건마다 괄호로 ( ) 묶어줄 것
+
+df.loc[ (df['Age'] > 60) & (df['Pclass'] >= 1) & (df['Sex'] == 'female') ]
+# -
+
+cond1 = df['Age'] > 60
+cond2 = df['Pclass'] >= 1
+cond3 = df['Sex'] == 'female'
+df[cond1 & cond2 & cond3]
 
 
