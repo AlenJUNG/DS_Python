@@ -118,4 +118,108 @@ print('array2d[[0, 1], 0:2] => ', array4.tolist())
 array5 = array2d[[0, 1]]
 print('array2d[[0, 1], 2] => ', array5.tolist())
 
+# # 불린 인덱싱
+# - 조건 필터링과 검색을 동시에 함
+# - 불린 인덱싱은 ndarray의 인덱스를 지정하는 [] 내 조건문을 그대로 기재하면 된다
+# - how to
+#   1. array1d > 5 와 같이 ndarray의 필터링 조건을 [ ] 안에 기재
+#   1. True값을 가진 인덱스만 저장
+#   1. 저장된 인덱스 데이터 세트로 ndarray 조회
+
+array1d = np.arange(start=1, stop=10)
+array1d > 5
+
+# [ ] 안에 array1d > 5 Boolean indexing을 적용
+array3 = array1d[array1d > 5] # array1d에서 5보다 큰 값을 = True값만 array1d 전체에서 반환함
+print('array1d > 5 boolean indexing :', array3)
+
+# # 행렬의 정렬 - sort()와 argsort()
+# - numpy sort() 방식 : 원본행렬은 그대로 유지
+# - ndarray.sort() 방식 : 원본행렬 자체를 정렬하며 반환 값은 None
+
+org_array = np.array([3, 1, 9, 5])
+print('원본 행렬:', org_array)
+
+# +
+# np.sort()로 정렬
+
+sort_array1 = np.sort(org_array)
+print('np.sort() 호출 후 반환된 정렬 행렬:', sort_array1)
+print('np.sort() 호출 후 원본 행렬:', org_array)
+
+# +
+# ndarray.sort()로 정렬
+
+sort_array2 = org_array.sort()
+print('org_array.sort() 호출 후 반환된 행렬:', sort_array2)
+print('org_array.sort() 호출 후 원본 행렬:', org_array)
+# -
+
+# ### 내림차순으로 정렬하기 위해서는 [::-1] 를 적용
+# > np.sort()[::-1]
+
+sort_array1_desc = np.sort(org_array)[::-1]
+print('내림차순으로 정렬:', sort_array1_desc)
+
+# ### 행렬이 2차원 이상일 경우 axis 축 값 설정을 통해 방향 정렬 수행
+# - axis=0 : 행끼리 정렬
+# - axis=1 : 열끼리 정렬
+
+# +
+array2d = np.array([[8, 12],
+                   [7, 1]])
+
+sort_array2d_axis0 = np.sort(array2d, axis=0)
+print('로우 방향으로 정렬:\n', sort_array2d_axis0)
+
+sort_array2d_axis1 = np.sort(array2d, axis=1)
+print('컬럼 방향으로 정렬:\n', sort_array2d_axis1)
+# -
+
+# ### 행렬 정렬 시, 원본 행렬의 인덱스 변화를 미리 알아보기
+
+org_array = np.array([3, 1, 9, 5])
+sort_indices = np.argsort(org_array)
+print(type(sort_indices))
+print('행렬 정렬 시 원본 행렬의 인덱스:', sort_indices)
+
+org_array = np.array([3, 1, 9 ,5])
+sort_indices_desc = np.argsort(org_array)[::-1]
+print('행렬 내림차순 정렬 시 원본 행렬의 인덱스:', sort_indices_desc)
+
+# ### argsort()의 높은 활용도
+# - 실제 값과 그 값이 뜻하는 메타 데이터를 별도의 ndarray에 별도로 가져가서 활용해야 함
+
+# +
+name_array = np.array(['John', 'Mike', 'Sarah', 'Kate', 'Samuel'])
+score_array = np.array([78, 95, 84, 98, 88])
+
+sort_indices_asc = np.argsort(score_array)
+print('성적 오름차순 정렬 시 score_array의 인덱스:', sort_indices_asc)
+print('성적 오름차순으로 name_array의 이름 출력:', name_array[sort_indices_asc])
+# -
+
+# # 선형대수 - 행렬 내적과 전치 행렬 구하기
+# ### 행렬 내적 : 행렬 곱
+# > np.dot( )
+
+# +
+A = np.array([[1, 2, 3],
+              [4, 5, 6]])
+B = np.array([[7, 8],
+              [9, 10],
+              [11, 12]])
+
+dot_product = np.dot(A, B)
+print('행렬 내적 결과:\n', dot_product)
+# -
+
+# ### 전치 행렬 : 원본 행렬에서 행과 열 위치를 교환한 원소로 구성한 행렬 
+# > np.transpose()
+
+A = np.array([[1, 2],
+              [3, 4]])
+transpose_mat = np.transpose(A)
+print('A의 전치 행렬:\n', transpose_mat)
+
 
