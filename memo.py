@@ -14,72 +14,45 @@
 #     name: python3
 # ---
 
-# +
+import pandas as pd
 import numpy as np
 
-array1 = np.array([2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31])
-array1
-# -
+df1 = pd.read_csv('../DS_Python/01.  기본3문제/1_Highway/ds_highway_01_07.csv', encoding='utf-8', sep=',')
+df2 = pd.read_csv('../DS_Python/01.  기본3문제/1_Highway/ds_highway_08_12.csv', encoding='utf-8', sep=',')
 
-type(array1)
+df1
 
-array1.shape
+df2
 
-array1.size
-
-array2 = np.random.random(8)
-array2
-
-array3 = np.arange(2, 8, 2)
-
-array3
-
-array4 = np.arange(1, 9)
-array4
-
-array4[2:3] # 인덱싱과 슬라이싱은 대괄호 안에서 진행
-
-for i in range(10):
-    i += 1
-    print(i)
-
-array5 = np.full(10, 2)
-array5
-
-array1 = np.array([2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31])
-
-filter = np.where(array1 > 4) # 핵심코드
-
-array1[filter]
-
-array1.max()
-
-array1.min()
-
-array1.mean()
-
-array1.std()
-
-array1.var()
-
-np.median(array1)
-
-filter = np.where(array1 > 6)
-
-array1[filter]
 
 # +
-import numpy as np 
+def function(x):
+    if x == 'gyeonggi':
+        return 'GYEONGGI'
+    elif x == 'chungcheong':
+        return 'CHUNGCHEONG'
+    elif x == 'jeolla':
+        return 'JEOLLA'
+    elif x == 'gyeongsang':
+        return 'GYEONGSANG'
+    elif x == 'gangwon':
+        return 'GANGWON'    
 
-revenue_in_yen = [ 300000, 340000, 320000, 360000, 440000, 140000, 180000, 340000, 330000, 290000, 280000, 380000, 
-                  170000, 140000, 230000, 390000, 400000, 350000, 380000, 150000, 110000, 240000, 380000, 380000, 340000, 
-                  420000, 150000, 130000, 360000, 320000, 250000 ]
+df2['StartPoint'] = df2['StartPoint'].apply(lambda x : function(x)) # 열만 조건부 변경하기
 # -
 
-yen = np.array(revenue_in_yen)
+df2
 
-filter = np.where(yen <= 200000)
+df = pd.concat([df1, df2]) # pd.concat([]) pandas와 대괄호 실수
+df
 
-yen[filter]
+df_1 = df[df['StartPoint'] == 'GANGWON']
+
+df_1_1 = pd.concat([df_1['Gyeonggi'], df_1['Chungcheong'], df_1['Jeolla'], df_1['Gyeongsang'], df_1['Gangwon']])
+df_1_1
+
+df_1_1.describe()
+
+df_1_1.quantile(q = [0.25, 0.5, 0.75])
 
 
