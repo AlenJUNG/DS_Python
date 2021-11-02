@@ -46,6 +46,7 @@ df.loc[df['Age'] > 60, ['Name', 'Age']].head(3)
 
 # +
 # 다중 조건 시, 각 조건마다 괄호로 ( ) 묶어줄 것
+# Q) Age 가 60 초과하고 Pclass가 1 이상이며 Sex가 여성인 경우를 필터링
 
 df.loc[ (df['Age'] > 60) & (df['Pclass'] >= 1) & (df['Sex'] == 'female') ]
 # -
