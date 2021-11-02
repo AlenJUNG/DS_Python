@@ -30,6 +30,10 @@ df = pd.read_csv(r'C:\Users\Administrator\DS_Python\data\titanic\train.csv')
 # - 탭으로 필드가 구분되어 있다면 read_csv('파일명', sep = '\t')
 # - sep 인자를 생략하면 자동으로 콤마로 할당
 
+df[-5:]
+
+df.tail(20)[5:]
+
 df.head(3)
 
 type(df)
