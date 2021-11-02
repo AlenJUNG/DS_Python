@@ -27,11 +27,16 @@ import numpy as np
 
 df = pd.read_csv(r'C:\Users\Administrator\DS_Python\data\titanic\train.csv')
 
+# ### Q) Name 컬럼 기준 오름차순 정렬하라
+
 # +
 # Name 오름차순 정렬
 
 sorted = df.sort_values(by=['Name'])
 sorted.head(3)
+# -
+
+# ### Q) Pclass, Name 기준 내림차순 정렬하라
 
 # +
 # Pclass, Name 내림차순 정렬
